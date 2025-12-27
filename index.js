@@ -6,11 +6,28 @@
 function to12(time) {
   console.log(time);
 
-  if (parseInt(`${time[0]}${time[1]}`) >= 12) {
-    return `${time[0]}${time[1]}:${time[2]}${time[3]} PM`;
-  } else {
-    return `${time[0]}${time[1]}:${time[2]}${time[3]} AM`;
+  // get hours
+  let hours = parseInt(time[0] + time[1]);
+  console.log(hours);
+
+  // get mins
+  const mins = time.slice(2);
+  console.log(mins);
+
+  // determine period
+  const period = hours >= 12 ? 'PM' : 'AM';
+
+  // convert 0 hours to 12 (Midnight)
+  if (hours === 0) {
+    hours = 12;
   }
+
+  // conver 13-23 to 1-11 (Afternoon)
+  else if (hours > 12) {
+    hours = hours - 12;
+  }
+
+  return `${hours}:${mins} ${period}`;
 
   // return time;
 }
